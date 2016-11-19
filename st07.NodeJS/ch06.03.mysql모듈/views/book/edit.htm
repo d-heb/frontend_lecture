@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Page</title>
+    <meta charset="UTF-8">
+    <style></style>
+    
+    
+</head>
+<body>
+    <h1>Edit Page</h1>
+    <hr />
+    <form id="writeForm" method="post" enctype="application/x-www-form-urlencoded">
+    <fieldset>
+        <legend>Edit Data</legend>
+        <table>
+            <tr>
+                <td><label>Id<label></td>
+                <td><input type="text" name="book_id" value="<%= data.book_id %>" disabled /></td>
+            </tr>
+            <tr>
+                <td><label>Title<label></td>
+                <td><input type="text" name="title" value="<%= data.title %>" /></td>
+            </tr>
+            <tr>
+                <td><label>Publisher<label></td>
+                <td><input type="text" name="publisher" value="<%= data.publisher %>" /></td>
+            </tr>
+            <tr>
+                <td><label>Year<label></td>
+                <td><input type="text" name="year" value="<%= data.year %>" /></td>
+            </tr>
+            <tr>
+                <td><label>Price<label></td>
+                <td><input type="text" name="price" value="<%= data.price %>" /></td>
+            </tr>
+            <tr>
+                <td><label>dtm<label></td>
+                <td><input type="text" name="dtm" value="<%= data.dtm %>" /></td>
+            </tr>
+            <tr>
+                <td><label>use_yn<label></td>
+                <td><input type="checkbox" name="use_yn" value="<%= data.use_yn %>" <% if(data.use_yn){ %> checked='checked' <% } %> /></td>
+            </tr>
+            <tr>
+                <td><label>authid<label></td>
+                <td><input type="text" name="authid" value="<%= data.authid %>" /></td>
+            </tr>
+        </table>
+
+        <input id="btnSubmit" type="submit" value="수정" />
+        <input id="btnList"   type="button" value="목록" />
+        <input id="btnReset"  type="reset"  value="취소" />
+    </fieldset>
+    </form>
+</body>
+</html>
+

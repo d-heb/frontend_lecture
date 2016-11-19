@@ -1,0 +1,3 @@
+A. GNU GENERAL PUBLIC LICENSE
+B. libssh2 License
+C. OpenSSL and SSLeay License

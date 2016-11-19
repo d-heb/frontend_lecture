@@ -1,0 +1,30 @@
+<html>
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <% var name = 'ejs testing' %>
+    <h1><%= name %></h1>
+    <hr/>
+    <% for(var i = 0; i < 10; i++) { %>
+        <h2>2 * <%= i %> = <%= 2 * i%></h2>
+    <% } %>
+
+    <h1><%= name %></h1>
+    <ul>
+        <% for(var i=0; i<drinks.length; i++) { %>
+        <li><%= drinks[i].name %> - <%= drinks[i].drunkness %></li>
+        <% } %>
+    </ul>
+
+    <h1>Loop</h1>
+    <ul>
+        <% drinks.forEach(function(drink) { %>
+        <li><%= drink.name %> - <%= drink.drunkness %></li>
+        <% }); %>
+    </ul>
+</body>
+</html>
+
+
+

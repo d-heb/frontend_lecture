@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>one phone</title>
+    <meta charset="UTF-8">
+    <style>
+        table, td, th { border: 1px solid green; }
+        th { background-color: green; color: white; }
+    </style>
+    
+</head>
+<body>
+    <form action="./writeone" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="text" name="name"  size="50"
+             placeholder="폰 이름" required="required" />
+        <br> 
+        <input type="text" name="manufacturer" size="50" 
+            placeholder="폰 제조사" required="required"/>
+        <br> 
+        <input type="text" name="price" size="50" 
+            placeholder="폰 가격" required="required" />
+        <br> 
+        
+        <input type="submit" value="작성" />
+    </form>
+</body>
+</html>
+

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>one phone</title>
+    <meta charset="UTF-8">
+    <style>
+        table, td, th { border: 1px solid green; }
+        th { background-color: green; color: white; }
+    </style>
+    
+</head>
+<body>
+    
+    <table>
+        <tr>
+            <th>no</th>
+            <th>name</th>
+            <th>manufacturer</th>
+            <th>price</th>
+        </tr>
+        
+        <!--  반복 구간 시작 -->
+        <% items.forEach(function(item) { %>
+        <tr>
+            <td>no</td>
+            <td><%= item.name %></td>
+            <td><%= item.manufacturer %></td>
+            <td><%= item.price %></td>
+        </tr>
+        <% }); %>
+        <!--  반복 구간 끝 -->
+    </table> 
+
+</body>
+</html>
