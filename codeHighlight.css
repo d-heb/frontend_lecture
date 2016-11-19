@@ -1,0 +1,41 @@
+body {
+    color: #2f3538;
+}
+
+code {
+    background-color: #9d9d9d;
+    display: block;
+    padding: 15px;
+    margin: 15px;
+    text-align: center;
+    font-weight: 600;
+    color: #303030;
+}
+
+strong {
+    color: #a13b66;
+    font-weight: 600;
+}
+
+.context {
+    border: 1px solid #0f69ce;
+    margin: 15px;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-right:15px;
+}
+
+.value {
+    background-color: #b4c1ca;
+    display: block;
+    padding: 15px;
+    margin: 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #303030;
+}
+
+.tab {
+    margin-left: 20px;
+    list-style: square;
+}
