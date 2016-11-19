@@ -3,10 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    
+    <link rel="stylesheet" type="text/css" href="../../codeHighlight.css">
+    <script src="../../common.js"></script>
+    <script src="func.js"></script>
 </head>
 <body>
+<div id="">
+    <ul class="context">
+        함수는 객체다
+         함수의 프로퍼티와 메서드
+         prototype 프로퍼티
+         constructor 프로퍼티
+         함수 계층도
+         함수의 종류
+         콜백 함수
+         즉시 함수
+         내부 함수
+         클로저 함수
+         재귀 함수
+         생성자 함수
+    </ul>
+    <ul class="context">
+        <li><strong>함수 = 코드영역 + 프로퍼티 + 메서드</strong></li>
 
+        변수에 함수 대입 가능
+         프로퍼티에 함수 대입 가능
+         배열 요소로 함수 사용 가능
+         매개변수로 함수 사용 가능
+         리턴값으로 함수 사용 가능
+    </ul>
+    클로저 함수에 있는 변수 은닉( 숨기기) 위해서 사용. private 프로퍼티가 되는 것임.
+    return에 호출하는 함수는 외부에 보이도록 함.
+
+    => java의 class와 같은 형식으로 생각하면 됨.
+    <code> class aa{
+        private string name='aa';
+        private int score = 0;
+
+        public void getId (){
+        return name;
+        }
+        public int setID (String name){
+        this.name = name;
+        }
+    </code>
+    <div class="value">
+        <script> clousreFunction();</script>
+    </div>
+
+</div>
+
+OOP : 캡슐화(명사:프로퍼티, 동사:메소드를 묶는다)., 상속: prototype 지정 : 부모 찾아가는 것 extends, 정보은닉(클로저 : , 변수 private), 다형성(불가)
+<h3>OOP</h3>
+<ul>
+    <li>클래스기반 : C++, JAVA</li>
+    <li>프로토타입기반 : 캡슐화(명사:프로퍼티, 동사:메소드를 묶는다).</li>
+</ul>
+<div class="context">
+    //객체리터럴 : 하나만 만드는 것
+    //생성자를 이용한 객체함수 : class 비슷하게 만드는 것, 똑같은 것을 여러개 만드는 것
+    function Person(name){
+    //생성자 : 대문자
+    this.name = name;
+    this.getName = function() {this.name;}
+    this.setName = function() {this.name = name;}
+    }
+    var foo = new Person('me');
+    var you = new Person('you');
+
+    foo.setName('me');
+    trace(foo.getName());
+
+    //생성자의 메서드 문제점 : 똑같은 메서드를 사용하면 메모리 낭비. 따라서 메소드 하나만 하는 법
+    function Person2(name){
+    //생성자 : 대문자
+    this.name = name;
+    }
+
+    //메소드 참조가 가능하다 : 생성자.prototype.function : 메모리를 줄이게 된다. & 편리함!
+
+    Person2.prototype.getName = function () {
+    this.name;
+    }
+
+    Person2.prototype.setName = function (name) {
+    this.name = name;
+    }
+
+    Person2.prototype = {
+    getName: function(){trace('aa', aa);}
+    }
+
+    var you2 = new Person('you2');
+    you2.setName('you2remake')
+    you2.getName();
+
+    //정적 프로퍼티 / 정적 메소드
+
+    //상속 : 생성자로 사용한다. 프로토타입
+    <code>Dog.prototype = new Animal();</code>
+    <code>Dog.prototype.constructor = dog;</code>
+    //부모 상속 연결
+
+</div>
 </body>
 </html>
 
