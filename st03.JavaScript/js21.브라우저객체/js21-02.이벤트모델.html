@@ -3,8 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    
 </head>
+<link rel="stylesheet" type="text/css" href="../../codeHighlight.css">
+<script src="../../common.js"></script>
+<script src="browser.js"></script>
+<script>
+    window.onload = function() {
+        var btn = document.getElementById('btn');
+        btn.onclick = function (event) {
+            window.alert(event.target.id + ' click');
+        }
+
+        var btn2 = document.getElementsByClassName('btn2');
+        btn2[1].onclick = function (event) {
+            window.alert(event.target.className + ' click');
+            //click event remove :  null
+            this.onclick == null;
+            //event cancel : it is easy to make > return false;
+            return false;
+        }
+
+        var p = document.getElementsByName('name');
+        for (var i = 0; i < p.length; i++) {
+            p[i].count = i;
+            p[i].onclick = function (event) {
+                window.alert(this.count  +' click');
+            }
+        }
+//
+//        for(var i in p){
+//            p[i].onclick = function (event) {
+//                window.alert(event.target.attributes[0].name +' click');
+//            }
+//        }
+    }
+    //함수 vs 메서드
+    // ~의 : 메서드
+    // 함수 this : window 객체
+    // xxx의 매서드 this : 주인(~XXX)을 가르킨다.
+</script>
 <body>
     <input id='btn' type="button" value='버튼'>
     <input class='btn2' type="button" value='버튼'>

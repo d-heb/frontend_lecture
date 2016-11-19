@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM == BOM</title>
+</head>
+<link rel="stylesheet" type="text/css" href="../../codeHighlight.css">
+<script src="../../common.js"></script>
+<script src="browser.js"></script>
+<body>
+<h3> event, page loading sequence</h3>
+<div id="00">
+    <ol>
+        <li>웹브라우저시작</li>
+        <li>html파싱</li>
+        <li>외부스크립트와 css로딩</li>
+        <li>dom 생성</li>
+        <li>이미지와 리소스 로딩</li>
+        <li>페이지로딩완료</li>
+    </ol>
+</div>
+    <div id="01">
+        <code>브라우저객체 : window</code>
+        <code class="tab">Event, document, location</code>
+        <ul class="context">
+        </ul>
+        <div class="value">
+            <script></script>
+        </div>
+    </div>
+<div id="windowEvent">
+    "on : ~할때"
+    <h3>이벤트 버블링 </h3>
+    <ol>
+        <li>클릭되는 요소 </li>
+        <li>html</li>
+        <li>담당 핸들러 찾는다 </li>
+    </ol>
+
+    <script>
+        document.getElementById("href").addEventListener("click", function(event){
+            event.preventDefault()
+        });
+        window.onload = function(event){
+            alert('onload');
+            console.log('onload');
+
+            //trace('pageEvent', '페이지 onload 실행');
+        }
+        window.onunload = function(){
+            alert('onunload');
+            console.log('onunload');
+           // trace('pageEvent', '페이지 onunload 실행');
+        }
+
+    </script>
+    <a id="href" href="http://www.naver.com">naver</a>
+</div>
+    <div id="event">
+        <h3>마우스 이벤트</h3>
+
+    </div>
+    <p> body 안에...</p>
+
+    <a href="http://www.naver.com">naver</a>
+</body>
+</html>
