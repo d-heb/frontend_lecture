@@ -15,7 +15,24 @@
         .gray   { background: gray;   }
     </style>
     
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $('#value_read').click(function () {
+            var val = $('#text').val();
+            alert(val);
+        })
+        $('#value_create').click(function () {
+            var val = $('#text').val();
+            var str = val + ' > 추가';
+            $('#text').text(str);
+        $('#value_update').click(function () {
+            var val = $(this).val();
+            $('#text').text(val);
+        })
+        $('#value_delete').click(function () {
+            $('#text').text('');
+        })
+    </script>
 </head>
 <body>
 
