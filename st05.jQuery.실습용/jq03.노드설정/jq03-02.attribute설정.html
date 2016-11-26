@@ -21,22 +21,78 @@
 
     <script src="../jquery-3.1.0.js"></script>
     <script>
-        $('button').click(function (e) {
-            var target = $(e.target);
-            switch (e.target.className) {
-                case 'white text_read' :
-                    alert(target.text());
-                    break;
-                case 'white text_create':
-                    target.append(" > 추가");
-                    break;
-                case 'white text_update':
-                    target.text(title_text);
-                    break;
-                case 'white text_delete':
-                    target.text('');
-            }
+        $(document).ready(function (e) {
+            var resultAttr = $('#result_attr');
+            var resultStyle = $('#result_style');
+            var resultClass = $('#result_class');
+            var resultData = $('#result_data');
+
+            var img = $('.pclick>img');
+            var span = $('#style');
+            var className = $('#class');
+
+            $('p.yellow').click(function(e){
+                $(e.target).toggleClass('toggleStyle');
+            });
+                $('button').click(function (e) {
+                switch (e.target.id){
+                    case 'attr_reade':
+                        resultAttr.text(img.attr('src'));
+                        break;
+                    case 'attr_creat':
+                        var imgSrc = "images/im2.jpg";
+                        img.eq(1).attr('src', imgSrc);
+                        break;
+                    case 'attr_update':
+                        var imgSrc = "images/im3.jpg";
+                        img.eq(1).attr('src', imgSrc);
+                        break;
+                    case 'attr_delete':
+                        var imgSrc = "images/im3.jpg";
+                        img.eq(1).attr('src', '');
+                        break;
+
+                    case 'style_read':
+                        resultStyle.text(span.css('border'));
+                        break;
+                    case 'style_create':
+                        span.css('border','3px solid blue');
+                        resultStyle.text(span.css('border'));
+                        break;
+                    case 'style_update':
+                        span.css('border','3px dashed pink');
+                        resultStyle.text(span.css('border'));
+                        break;
+                    case 'style_delete':
+                        span.css('border','');
+                        resultStyle.text(span.css('border'));
+                        break;
+
+                    case 'class_read':
+                        resultClass.text(className.hasClass('white'));
+                        break;
+                    case 'class_create':
+                        className.addClass('red');
+                        resultClass.text(className.attr('class'));
+                        break;
+                    case 'class_update':
+                        className.removeClass('red');
+                        className.addClass('yellow');
+                        resultClass.text(className.attr('class'));
+                        break;
+                    case 'class_delete_part':
+                        className.removeClass('red');
+                        resultClass.text(className.attr('class'));
+                        break;
+                    case 'class_delete_all':
+                        className.removeClass();
+                        resultClass.text(className.attr('class'));
+                        break;
+                }
+
+            })
         })
+
     </script>
     
 </head>
@@ -51,8 +107,8 @@
             <img src="images/im1.jpg" style="" class="" data-sw="data값" >
             <img >
         </div>
-        <button id="attr_create">일반속성 추가(C)</button>
         <button id="attr_read"  >일반속성 읽기(R)</button>
+        <button id="attr_create">일반속성 추가(C)</button>
         <button id="attr_update">일반속성 수정(U)</button>
         <button id="attr_delete">일반속성 삭제(D)</button>
         <div id="result_attr" class="gray"></div>
@@ -62,9 +118,8 @@
     <div>
         <h4>style CRUD</h4>
         <span id="style" style="border:2px dotted darkred; background-color: white;">엘리먼트에 style CRUD 하기</span>
-
-        <button id="style_create">style 추가(C)</button>
         <button id="style_read"  >style 읽기(R)</button>
+        <button id="style_create">style 추가(C)</button>
         <button id="style_update">style 수정(U)</button>
         <button id="style_delete">style 삭제(D)</button>
         <div id="result_style" class="gray"></div>
@@ -75,8 +130,8 @@
         <h4>class CRUD</h4>
         <span id="class" class="white">엘리먼트에 class CRUD 하기</span>
 
-        <button id="class_create"     >class 추가(C)</button>
         <button id="class_read"       >class 읽기(R)</button>
+        <button id="class_create"     >class 추가(C)</button>
         <button id="class_update"     >class 수정(U)</button>
         <button id="class_delete_part">class 부분삭제(D)</button>
         <button id="class_delete_all" >class 전체삭제(D)</button>
