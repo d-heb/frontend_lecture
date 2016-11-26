@@ -5,7 +5,30 @@
     <style>
         img { padding:5px; width:130px; height:130px; border:1px solid gray; }
     </style>
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var imgProp = [{src:'images/im1.jpg', title:'im1.jpg', alt:'im1.jpg'},
+                           {src:'images/im2.jpg', title:'im2.jpg', alt:'im2.jpg'},
+                           {src:'images/im3.jpg', title:'im3.jpg', alt:'im3.jpg'},
+                           {src:'images/im4.jpg', title:'im4.jpg', alt:'im4.jpg'},
+                           {src:'images/im5.jpg', title:'im5.jpg', alt:'im5.jpg'}];
+
+            $('img').click(function (e) {
+                var listItem = $( "img" );
+                var index = listItem.index(this);
+
+                console.log($(e.target));
+                console.log(index);
+                console.log(imgProp[index]);
+
+                if(index>4)
+                    $(e.target).attr('src','').attr('title','').attr('alt','');
+                else
+                    $(e.target).attr('src',imgProp[index].src).attr('title',imgProp[index].title).attr('alt',imgProp[index].alt);
+            })
+        });
+    </script>
     
 </head>
 <body>
