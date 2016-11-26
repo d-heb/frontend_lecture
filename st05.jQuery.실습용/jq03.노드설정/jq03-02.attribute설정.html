@@ -19,7 +19,25 @@
         .toggleStyle { background-color: red;   color:white;}
     </style>
 
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $('button').click(function (e) {
+            var target = $(e.target);
+            switch (e.target.className) {
+                case 'white text_read' :
+                    alert(target.text());
+                    break;
+                case 'white text_create':
+                    target.append(" > 추가");
+                    break;
+                case 'white text_update':
+                    target.text(title_text);
+                    break;
+                case 'white text_delete':
+                    target.text('');
+            }
+        })
+    </script>
     
 </head>
 <body>
