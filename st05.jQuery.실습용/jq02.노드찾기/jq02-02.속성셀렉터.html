@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        div, span {
+            background: #FFF;
+            padding: 10px;
+            margin: 10px;
+        }
+
+        hr {
+            clear: both;
+        }
+    </style>
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var myApp = {};
+            myApp.init = function (e) {
+                $('*').css('border', '');
+                $('*').css('background', '');
+            }
+
+            $('input').click(function (e) {
+                myApp.init();
+                var id = e.target.id;
+                switch (id) {
+                    case 'has':
+                        $('a[target]').css('background', 'yellow');
+                        break;
+                    case 'equal':
+                        $('a[href="http://slqer.com"]').css('background', 'yellow');
+                        break;
+                    case 'notequal':
+                        $('a[href!="http://slqer.com"]').css('background', 'yellow');
+                        break;
+                    case 'startwith':
+                        $('a[href^="http://ho"]').css('background', 'pink');
+                        break;
+                    case 'endwith':
+                        $('a[href $= "net"]').css('background', 'yellow');
+                        break;
+                    case 'contains':
+                        $('a[name *= "man"]').css('background', 'yellow');
+                        break
+                    case 'findword':
+                        $('a[name ~= "man"]').css('background', 'yellow');
+                        break;
+                }
+            });
+        });
+    </script>
+
+</head>
+<body>
+<h2>Attribute Selector</h2>
+<div>
+    <a name='man' href="http://slqer.com">SQLER.COM(No Target)</a><br/>
+    <a name='superman' href="http://slqer.com" target="_blank">SQLER.COM(Target)</a><br/>
+    <a name='iron man' href="http://hoons.net">Hoons.NET(No Target)</a><br/>
+    <a name='bat man' href="http://hoons.net" target="_blank">Hoons.NET(Target)</a><br/>
+</div>
+<a name='joker' href="http://hows.co.kr">Hows.co.kr(No Target)</a><br/>
+<a name='manual' href="http://hows.co.kr" target="_blank">Hows.co.kr(No Target)</a><br/>
+
+<hr>
+<input id='has' type='button' value='has'>
+<input id='equal' type='button' value='equal'>
+<input id='notequal' type='button' value='notequal'>
+<input id='startwith' type='button' value='startwith'>
+<input id='endwith' type='button' value='endwith'>
+<input id='contains' type='button' value='hoons contains'>
+<input id='findword' type='button' value='man findword'>
+</body>
+</html>
+
