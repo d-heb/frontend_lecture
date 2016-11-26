@@ -3,16 +3,72 @@
 <head>
     <meta charset="UTF-8">
     <style>
-   		pre   { font-size:13pt;	}
-        #panel { width: 600px; height: 400px; border: 1px solid #999; position: relative; }
-        #fish { position: absolute; left: 250px; top: 150px; } 
+        pre {
+            font-size: 13pt;
+        }
+
+        #panel {
+            width: 600px;
+            height: 400px;
+            border: 1px solid #999;
+            position: relative;
+        }
+
+        #fish {
+            position: absolute;
+            left: 250px;
+            top: 150px;
+        }
     </style>
-    
-    
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var fish = $('#fish');
+
+            var fish_top = fish.css('top');
+            var fish_left = fish.css('left');
+            var fish_right = fish.css('right');
+            var fish_bottom = fish.css('bottom');
+            var clickCount = 0;
+
+            $('button').click(function (e) {
+                var moveTop = fish_top;
+                var moveLeft = fish_left;
+
+
+                if (parseInt(fish_right) > 0 || parseInt(fish_bottom) > 0
+                    || parseInt(fish_left) > 0 || parseInt(fish_top) > 0) {
+                    moveTop = parseInt(fish_top) + 150 + clickCount;
+                    moveLeft = parseInt(fish_left) + 150 + clickCount;
+                }
+
+                if (clickCount % 2) {
+                    fish.css('top', moveTop + 'px');
+                    fish.css('bottom', '');
+                }
+                else if (clickCount % 3) {
+                    fish.css('top', '');
+                    fish.css('bottom', moveTop + 'px');
+
+                } else if (clickCount % 5) {
+                    fish.css('left', moveLeft + 'px');
+                    fish.css('right', '');
+                } else {
+                    fish.css('left', '');
+                    fish.css('right', moveLeft + 'px');
+                }
+
+                clickCount++;
+            })
+        })
+
+    </script>
+
 </head>
 
 <body>
-    <pre>
+<pre>
 물고기 움직이기
 
 버튼을 클릭할 때마다 물고기를 랜덤하게 움직이도록 만드는 것입니다.
@@ -20,12 +76,12 @@
 움직이게 만들어야 합니다.
     </pre>
 
-    <button id="btnStart">
-        클릭하면 물고기가 움직여요.
-    </button>
-    <div id="panel">
-        <img src="images/fish.png" id="fish">
-    </div>
+<button id="btnStart">
+    클릭하면 물고기가 움직여요.
+</button>
+<div id="panel">
+    <img src="images/fish.png" id="fish">
+</div>
 
 </body>
 </html>
