@@ -3,45 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        button { cursor: pointer;}
-        p { cursor: pointer; width: 500px; }
-        p:hover { background: #c1ceff; }
-        div     { width: 500px; background: yellow; padding-bottom: 5px; }
-        hr      { width: 500px; float: left; }
-        ul      { width: 300px; }
-        .yellow { background: yellow; }
-        .red    { background: red;    }
-        .white  { background: white; cursor:pointer; }
-        .gray   { background: gray;   }
+        button {
+            cursor: pointer;
+        }
+
+        p {
+            cursor: pointer;
+            width: 500px;
+        }
+
+        p:hover {
+            background: #c1ceff;
+        }
+
+        div {
+            width: 500px;
+            background: yellow;
+            padding-bottom: 5px;
+        }
+
+        hr {
+            width: 500px;
+            float: left;
+        }
+
+        ul {
+            width: 300px;
+        }
+
+        .yellow {
+            background: yellow;
+        }
+
+        .red {
+            background: red;
+        }
+
+        .white {
+            background: white;
+            cursor: pointer;
+        }
+
+        .gray {
+            background: gray;
+        }
     </style>
-    
-    
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var title_html = $('.pclick').html();
+            var title_text = $('.pclick').text();
+
+            console.log(title_html);
+            console.log(title_text);
+
+            $('button').click(function (e) {
+                var id = e.target.id;
+                var target = $(event.target);
+                console.log(target);
+                switch (id) {
+                    case 'element_read':
+                        alert(title_html);
+                        break;
+                    case 'element_create':
+                        var img = " <img src='images/im1.jpg'>";
+                        $('#result_element').html(img);
+//                        $('img').show();
+                        break;
+                    case 'element_update':
+                        $('#result_element').text(title_text);
+                        break;
+                    case 'element_delete':
+                        $('#result_element').text('');
+                        break;
+                }
+            })
+            $('li').click(function (e) {
+                var target = $(e.target);
+                switch (e.target.className) {
+                    case 'white text_read' :
+                        alert(target.text());
+                        break;
+                    case 'white text_create':
+                        target.append(" > 추가");
+                        break;
+                    case 'white text_update':
+                        target.text(title_text);
+                        break;
+                    case 'white text_delete':
+                        target.text('');
+                }
+            })
+        });
+    </script>
 </head>
 <body>
-    <p class="pclick">
-        html()은 엘리먼트의 <span id="tag"> 내용을 </span>
-        HTML 형식의<span id="text"> 문자열로 </span> 리턴한다.
-    </p>
+<p class="pclick">
+    html()은 엘리먼트의 <span id="tag"> 내용을 </span>
+    HTML 형식의<span id="text"> 문자열로 </span> 리턴한다.
+</p>
 
-    <div>
-        <h3>tag node CRUD</h3>
-        <button id="element_read"  >태그 읽기(R)</button>
-        <button id="element_create">태그 추가(C)</button>
-        <button id="element_update">태그 수정(U)</button>
-        <button id="element_delete">태그 삭제(D)</button>
-        <div id="result_element" class="gray"> element CRUD </div>
-    </div>
-    <hr>
+<div>
+    <h3>tag node CRUD</h3>
+    <button id="element_read">태그 읽기(R)</button>
+    <button id="element_create">태그 추가(C)</button>
+    <button id="element_update">태그 수정(U)</button>
+    <button id="element_delete">태그 삭제(D)</button>
+    <div id="result_element" class="gray"> element CRUD</div>
+</div>
+<hr>
 
-    <div>
-        <h3>text node CRUD</h3>
-        <ul>
-            <li class="white text_read"  >text 읽기(R)</li>
-            <li class="white text_create">text 추가(C)</li>
-            <li class="white text_update">text 수정(U)</li>
-            <li class="white text_delete">text 삭제(D)</li>
-        </ul>
-    </div>
+<div>
+    <h3>text node CRUD</h3>
+    <ul>
+        <li class="white text_read">text 읽기(R)</li>
+        <li class="white text_create">text 추가(C)</li>
+        <li class="white text_update">text 수정(U)</li>
+        <li class="white text_delete">text 삭제(D)</li>
+    </ul>
+</div>
 </body>
 </html>
 
