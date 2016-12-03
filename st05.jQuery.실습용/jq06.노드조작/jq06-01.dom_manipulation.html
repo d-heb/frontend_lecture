@@ -4,49 +4,122 @@
     <meta charset="utf-8">
     <title>DOM 조작 메서드</title>
     <style>
-        div { margin: 5px; border: 2px red solid;  background: #ccff0e; }
-        .selected { border: 4px blue solid  !important;}
-        .added    { border: 2px dashed #000000; }
-        #center { border: 2px dashed #696cff; }
-        #center p { margin: 10px; background: #b96dff; }
-        .border { border: 2px dashed #ffb42e; margin: 5px; display:block; background: #b96dff; }
+        div {
+            margin: 5px;
+            border: 2px red solid;
+            background: #ccff0e;
+        }
+
+        .selected {
+            border: 4px blue solid !important;
+        }
+
+        .added {
+            border: 2px dashed #000000;
+        }
+
+        #center {
+            border: 2px dashed #696cff;
+        }
+
+        #center p {
+            margin: 10px;
+            background: #b96dff;
+        }
+
+        .border {
+            border: 2px dashed #ffb42e;
+            margin: 5px;
+            display: block;
+            background: #b96dff;
+        }
     </style>
-    
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var myApp = {};
+            myApp.init = function () {
+                $('*').removeClass('border');
+            }
+
+            $('input[type=button]').click(function (e) {
+                myApp.init();
+                var className = e.target.className;
+                var $name = $('.' + className);
+                var $center = $('#center');
+                $center.addClass('border');
+                switch (className) {
+                    case 'html'  :
+                        $center.html('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'prepend'  :
+                        $center.prepend('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'append'   :
+                        $center.append('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'before'   :
+                        $center.before('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'after'    :
+                        $center.after('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'wrap'     :
+                        $center.wrap('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'replace'  :
+                        $('p.two').replaceWith($('p .two').text(), $name.val());
+                        break;
+                    case 'clone'    :
+                        var $clone = $center.clone();
+                        $('#result').append($clone);
+                        break;
+                    case 'empty'    :
+                        $center.empty();
+                        ;
+                        break;
+                    case 'remove'   :
+                        $center.remove();
+                        break;
+                }
+            });
+        })
+    </script>
+
 </head>
 <body>
-    <p>DOM 조작 메서드</p>
+<p>DOM 조작 메서드</p>
 
-    <input class="html"     type="button" value="html()">
-    <input class="prepend"  type="button" value="prepend()">
-    <input class="append"   type="button" value="append()">
-    <input class="before"   type="button" value="before()">
-    <input class="after"    type="button" value="after()">
-    <hr>
-    <input class="wrap"     type="button" value="wrap()">
-    <input class="replace"  type="button" value="replace()">
-    <input class="clone"    type="button" value="clone()">
-    <input class="empty"    type="button" value="empty()">
-    <input class="remove"   type="button" value="remove()">
+<input class="html" type="button" value="html()">
+<input class="prepend" type="button" value="prepend()">
+<input class="append" type="button" value="append()">
+<input class="before" type="button" value="before()">
+<input class="after" type="button" value="after()">
+<hr>
+<input class="wrap" type="button" value="wrap()">
+<input class="replace" type="button" value="replace()">
+<input class="clone" type="button" value="clone()">
+<input class="empty" type="button" value="empty()">
+<input class="remove" type="button" value="remove()">
 
+<hr>
+<div id="main">
+    <div id="result"></div>
     <hr>
-    <div id="main">
-        <div id="result"></div>
-        <hr>
-        <div id="container">
-            <div id="header">
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
-                <div id="center">center
-                    <p class="box one"  >jQuery</p>
-                    <p class="box two"  >Mobile</p>
-                    <p class="box three">Story</p>
-                </div>
-                <div>&nbsp;</div>
-                <div>&nbsp;</div>
+    <div id="container">
+        <div id="header">
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div id="center">center
+                <p class="box one">jQuery</p>
+                <p class="box two">Mobile</p>
+                <p class="box three">Story</p>
             </div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
         </div>
     </div>
+</div>
 </body>
 </html>
 
