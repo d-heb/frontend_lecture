@@ -3,36 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        body { font-size: 15pt; font-family: "굴림"; }
-        div  { width:350px; }
-        ul.menu { padding: 10px; list-style: none; border: 1px #000 solid; width:350px; }
-        ul.menu li { border: 1px #eeeeee solid; padding-left: 10px; padding-right: 10px; display: block; }
-        li.select { background-color: #ccc; }
+        body {
+            font-size: 15pt;
+            font-family: "굴림";
+        }
+
+        div {
+            width: 350px;
+        }
+
+        ul.menu {
+            padding: 10px;
+            list-style: none;
+            border: 1px #000 solid;
+            width: 350px;
+        }
+
+        ul.menu li {
+            border: 1px #eeeeee solid;
+            padding-left: 10px;
+            padding-right: 10px;
+            display: block;
+        }
+
+        li.select {
+            background-color: #ccc;
+        }
     </style>
 
-    
-    
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            var myApp = {};
+            myApp.init = function () {
+                $('*').removeClass('select');
+            }
+
+            var $menuName = $('#menuName');
+            var $ul = $('.menu');
+
+            $('button').click(function (e) {
+                myApp.init();
+                var id = e.target.id;
+
+                switch (id) {
+                    case 'add'  :
+                        var text = $menuName.val();
+                        if(text === ""){
+                            $menuName.focus();
+                        }else{
+                            var $li = '<li>'+text+'</li>';
+                            $ul.append($li);
+                            $menuName.val('');
+                        }
+                        break;
+                    case 'update'  :
+                        $('.select').text($menuName.val());
+                        break;
+                    case 'remove'   :
+                        $center.append('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'up'   :
+                        $center.before('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                    case 'down'    :
+                        $center.after('<div>' + $name.val() + '</div>').addClass('added');
+                        break;
+                }
+            });
+
+            $('body').on('click', 'ul.menu>li' , function(e){
+                //동적 이벤트 리스너 설정
+                //페이지가 load된 후 추가된 엘리먼트에 이벤트를 설정할 때
+                myApp.init();
+
+                $(this).addClass('select');
+                console.log($(this).text());
+                $menuName.val($(this).text());
+            });
+        })
+
+
+
+
+    </script>
 </head>
 
 <body>
 <div>
-    <input type="text" id="menuName" />
+    <input type="text" id="menuName"/>
     <br>
-    <button id="add">
-        추가
-    </button>
-    <button id="update">
-        수정
-    </button>
-    <button id="remove">
-        삭제
-    </button>
-    <button id="up">
-        UP
-    </button>
-    <button id="down">
-        DOWN
-    </button>
+    <button id="add">추가</button>
+    <button id="update">수정</button>
+    <button id="remove">삭제</button>
+    <button id="up">UP</button>
+    <button id="down">DOWN</button>
 </div>
 
 <ul class="menu">
@@ -45,7 +113,7 @@
                 <li>input 박스의 값 읽기</li>
                 <li>선택된 메뉴 노드 찾기</li>
                 <li>추가된 엘리먼트에 동적 이벤트 추가하기</li>
-                <li>ul.menu에 추가되면  inputbox 초기화 </li>
+                <li>ul.menu에 추가되면 inputbox 초기화</li>
                 <ul>
                     <li>단, input 박스의 값이 빈 경우는 추가되어서는 안된다.</li>
                 </ul>
