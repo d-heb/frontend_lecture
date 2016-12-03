@@ -10,9 +10,50 @@
 	    th,td{ padding: 5px; font-size: small; }
 	    .even{ background:#F2F2F2; }
 	    .hover{ background:#B2D8FF; }
+	    .hover1{ background:#F78B83; }
+	    .hover2{ background:#DBFF70; }
 	</style>
-    
-	
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('tr:even').toggleClass('even');
+            $('tr:odd').toggleClass('odd');
+
+            var myApp = {};
+            myApp.init = function () {
+                $('*').removeClass('hover');
+            }
+
+//            $('td').hover(function (e) {
+//                myApp.init();
+//
+//                $(this).parent().toggleClass('hover');
+//                var index = $(this).index()+1;
+//                $('td:nth-child('+index+')').toggleClass('hover1');
+//                $(this).toggleClass('hover2');
+//            });
+
+            $('tr').mouseenter(function(e){
+                console.log('mouseenter::tr');
+                $(this).toggleClass('hover');
+            });
+            $('tr').mouseleave(function(e){
+                console.log('mouseleave::tr');
+                $(this).removeClass('hover');
+            });
+            $('td').mouseenter(function(e){
+                console.log('mouseenter::td');
+                var index = $(this).index()+1;
+                $('td:nth-child('+index+')').addClass('hover');
+            });
+            $('td').mouseleave(function(e){
+                console.log('mouseleave::td');
+                var index = $(this).index()+1;
+                $('td:nth-child('+index+')').removeClass('hover');
+            });
+        })
+    </script>
 </head>
 <body>
 
