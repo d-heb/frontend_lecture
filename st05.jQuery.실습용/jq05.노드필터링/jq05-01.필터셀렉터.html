@@ -6,30 +6,79 @@
         div   { background: #FFF; }
         table { border: 1px solid #AAA; width:98%; }
         td    { border: 1px solid #AAA; width: 20px; height: 20px; }
+        .select { background:#DBFF70; }
+        .select1 { background:#F78B83; }
     </style>
-    
-    
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var myApp = {};
+            myApp.init = function () {
+                $('*').removeClass('select');
+                $('*').removeClass('select1');
+                $('*').removeClass('select2');
+                $('tr:eq(2) > td:eq(4)').removeAttr('colspan',$('tr:eq(2) > td:gt(3)').length);
+                $('tr:eq(2) > td:gt(4)').show();
+
+            }
+            $('input[type=button]').click(function (e) {
+                myApp.init();
+                var id = e.target.id;
+
+                switch (id) {
+                    case 'eq'   : $('tr:eq(0) > td:eq(7)').addClass('select');      break;
+                    case 'gt'   : $('tr:eq(1) > td:gt(2)').addClass('select');      break;
+                    case 'lt'   : $('tr:eq(1) > td:lt(2)').addClass('select');      break;
+                    case 'odd'  : $('tr:eq(2) > td:odd').addClass('select');        break;
+                    case 'even' : $('tr:eq(2) > td:even').addClass('select');       break;
+                    case 'first': $('tr:eq(3) > td:first').addClass('select');      break;
+                    case 'last' : $('tr:eq(3) > td:last').addClass('select');       break;
+
+                    case 'ex1' : $('tr:even > td').addClass('select');              break;
+                    case 'ex2' : $('tr > td:odd').addClass('select');               break;
+                    case 'ex3' : $('tr:even > td:odd').addClass('select');          break;
+                    case 'ex4' : $('tr > td:nth-child(3n-2)').addClass('select');   break;
+                    case 'ex5' : $('td:nth-child(1)').addClass('select');           break;
+                    case 'ex6' : $('tr > td:first-child').addClass('select');
+                                 $('tr > td:last-child').addClass('select1');       break;
+                    case 'ex7' : $('tr > td:nth-child(3)').addClass('select');      break;
+                    case 'ex8' : var length = $('tr:eq(2) > td:gt(3)').length;
+                                 var colsTd = $('tr:eq(2) > td:eq(4)');
+                                              $(colsTd).attr('colspan',length).addClass('select');
+                                              $('tr:eq(2) > td:gt(4)').hide();
+                                              $('tr > td:first-child').addClass('select1');
+                                              $('tr > td:last-child').addClass('select');     break;
+                }
+            });
+
+        })
+    </script>
 </head>
 <body>
+<div>
+
+</div>
+<div>
     <h2>Filter Selector</h2>
-        <table>
-            <tr>
-                <td>#1</td> <td>#2</td> <td>#3</td> <td>#4</td> <td>#5</td>
-                <td>#6</td> <td>#7</td> <td>#8</td> <td>#9</td> <td>#10</td>
-            </tr>
-            <tr>
-                <td>#11</td> <td>#12</td> <td>#13</td> <td>#14</td> <td>#15</td>
-                <td>#16</td> <td>#17</td> <td>#18</td> <td>#19</td> <td>#20</td>
-            </tr>
-            <tr>
-                <td>#21</td> <td>#22</td> <td>#23</td> <td>#24</td> <td>#25</td>
-                <td>#26</td> <td>#27</td> <td>#28</td> <td>#29</td> <td>#30</td>
-            </tr>
-            <tr>
-                <td>#31</td> <td>#32</td> <td>#33</td> <td>#34</td> <td>#35</td>
-                <td>#36</td> <td>#37</td> <td>#38</td> <td>#39</td> <td>#40</td>
-            </tr>
-        </table>
+    <table>
+        <tr>
+            <td>#1</td> <td>#2</td> <td>#3</td> <td>#4</td> <td>#5</td>
+            <td>#6</td> <td>#7</td> <td>#8</td> <td>#9</td> <td>#10</td>
+        </tr>
+        <tr>
+            <td>#11</td> <td>#12</td> <td>#13</td> <td>#14</td> <td>#15</td>
+            <td>#16</td> <td>#17</td> <td>#18</td> <td>#19</td> <td>#20</td>
+        </tr>
+        <tr>
+            <td>#21</td> <td>#22</td> <td>#23</td> <td>#24</td> <td>#25</td>
+            <td>#26</td> <td>#27</td> <td>#28</td> <td>#29</td> <td>#30</td>
+        </tr>
+        <tr>
+            <td>#31</td> <td>#32</td> <td>#33</td> <td>#34</td> <td>#35</td>
+            <td>#36</td> <td>#37</td> <td>#38</td> <td>#39</td> <td>#40</td>
+        </tr>
+    </table>
     <hr>
     <div>
         <input id='eq'      type='button' value=':eq'>
@@ -49,6 +98,9 @@
         <input id='ex7'      type='button' value='ex7'>
         <input id='ex8'      type='button' value='ex8'>
     </div>
+
+</div>
+
 </body>
 </html>
 
