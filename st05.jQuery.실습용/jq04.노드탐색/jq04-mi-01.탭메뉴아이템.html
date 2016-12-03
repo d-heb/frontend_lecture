@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <title></title>
     <style>
-        .tab-menu { list-style: block; height: 80px; }
+        .tab-menu {
+            list-style: block;
+            height: 80px;
+        }
+
         .tab-menu li {
             width: 99px;
             height: 40px;
@@ -14,90 +18,146 @@
             display: inline-block;
             float: left;
         }
-        .tab-menu li:hover     { background-position-y: -40px; }
-        .tab-menu li.select    { background-position-y: -80px; height: 80px; }
-        .tab-menu li.menuitem1 { background-image: url(images/newbtn.bar.1.png); }
-        .tab-menu li.menuitem2 { background-image: url(images/newbtn.bar.2.png); }
-        .tab-menu li.menuitem3 { background-image: url(images/newbtn.bar.3.png); }
-        .tab-menu li.menuitem4 { background-image: url(images/newbtn.bar.4.png); }
-        .tab-menu li.menuitem5 { background-image: url(images/newbtn.bar.5.png); }
-        .tab-menu li.menuitem6 { background-image: url(images/newbtn.bar.6.png); }
 
-        input[type='button']:hover    { cursor: pointer; }
-        input[type='button']:disabled { background:none; border:none; color:darkgray; cursor: default;  }
+        .tab-menu li:hover {
+            background-position-y: -40px;
+        }
 
-        span { font-size: 50px; font-family: "NanumGothic", arial;}
- 
+        .tab-menu li.select {
+            background-position-y: -80px;
+            height: 80px;
+        }
+
+        .tab-menu li.menuitem1 {
+            background-image: url(images/newbtn.bar.1.png);
+        }
+
+        .tab-menu li.menuitem2 {
+            background-image: url(images/newbtn.bar.2.png);
+        }
+
+        .tab-menu li.menuitem3 {
+            background-image: url(images/newbtn.bar.3.png);
+        }
+
+        .tab-menu li.menuitem4 {
+            background-image: url(images/newbtn.bar.4.png);
+        }
+
+        .tab-menu li.menuitem5 {
+            background-image: url(images/newbtn.bar.5.png);
+        }
+
+        .tab-menu li.menuitem6 {
+            background-image: url(images/newbtn.bar.6.png);
+        }
+
+        input[type='button']:hover {
+            cursor: pointer;
+        }
+
+        input[type='button']:disabled {
+            background: none;
+            border: none;
+            color: darkgray;
+            cursor: default;
+        }
+
+        span {
+            font-size: 50px;
+            font-family: "NanumGothic", arial;
+        }
+
     </style>
     <script src="../jquery-3.1.0.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
+
             var liCount = $('#tabMenu1>li').length;
             $('input[type=button]').click(function (e) {
                 var target = $(e.target);
-                switch (e.target.id){
+                console.log(e.target.id);
+                switch (e.target.id) {
                     case 'mission1':
                         $('#result').text(liCount);
+                        console.log($(this));
+                        $(this).attr('disabled', true);
                         break;
                     case 'mission2':
-                        var liIndex = target.eq();
-                        $('#result').text(liIndex);
+                        getClickedIndex();
+                        $(this).attr('disabled', true);
                         break;
                     case 'mission3':
-                        var liIndex = target.eq();
-                        $('#result').text(liIndex);
+                        setClassIndex();
+                        $(this).attr('disabled', true);
                         break;
                     case 'mission4':
-                        var liIndex = target.eq();
-                        $('#result').text(liIndex);
+                        setTabStyle();
+                        $(this).attr('disabled', true);
                         break;
                 }
-
             })
 
-            $('#tabMenu1>li').click(function (e) {
-                var target = $(e.target);
-            });
-            var tabIndex = function(){
-                $('#tabMenu1>li').eq();
+            var getClickedIndex = function () {
+                $('#tabMenu1>li').click(function () {
+                    var index = $(this).index();
+                    $('#result').text(index);
+                })
+            }
+
+            var setClassIndex = function () {
+                for (var i in $('#tabMenu1>li')) {
+                    setTimeout($(i).addClass('select'), 1000);
+                }
+            }
+
+            var setTabStyle = function () {
+                $('#tabMenu1>li').click(function () {
+                    $('#tabMenu1> *').removeClass('select');
+                    $(this).addClass('select');
+                    var index = $(this).index();
+                    $('#result').text(index);
+                })
             }
         })
+
+
     </script>
 
 </head>
 
 <body>
-    <ul class="tab-menu" id="tabMenu1">
-        <li class="menuitem1"> google </li>
-        <li class="menuitem2"> facebook </li>
-        <li class="menuitem3"> pinterest </li>
-        <li class="menuitem4"> twitter </li>
-        <li class="menuitem5"> airbnb </li>
-        <li class="menuitem6"> path </li>
-    </ul>
+<ul class="tab-menu" id="tabMenu1">
+    <li class="menuitem1"> google</li>
+    <li class="menuitem2"> facebook</li>
+    <li class="menuitem3"> pinterest</li>
+    <li class="menuitem4"> twitter</li>
+    <li class="menuitem5"> airbnb</li>
+    <li class="menuitem6"> path</li>
+</ul>
 
-    <span id="result"></span>
+<span id="result"></span>
 
-    <div>
-        <p>미션 01: <br>탭 메뉴 아이템(#tabMenu1 li) 개수가 몇 개 인지 출력해 주세요.
-            <br>
-            <input id='mission1'   type='button' value='클릭'>
-        </p>
-        <p>미션 02: <br>클릭한 탭메뉴의 인덱스 값 출력하기
-         탭 메뉴가 클릭되면 클릭한 탭메뉴 아이템이 몇 번째인지 값을 출력해 주세요.
-            <br>
-            <input id='mission2'   type='button' value='클릭'>
-        </p>
-        <p>미션 03: <br>1초에 한 번씩 탭메뉴 아이템에 select 클래스 적용하기
-         탭메뉴 아이템 개수만큼 1초에 한 번씩 순차적으로 탭메뉴 아이템에 select 클래스를 적용해 주세요.
-            <br>
-            <input id='mission3'   type='button' value='클릭'>
-        </p>
-        <p>미션 04: <br>탭메뉴 구현하기
-            <br>
-            <input id='mission4'   type='button' value='클릭'>
-        </p>
-    </div>
+<div>
+    <p>미션 01: <br>탭 메뉴 아이템(#tabMenu1 li) 개수가 몇 개 인지 출력해 주세요.
+        <br>
+        <input id='mission1' type='button' value='클릭'>
+    </p>
+    <p>미션 02: <br>클릭한 탭메뉴의 인덱스 값 출력하기
+        탭 메뉴가 클릭되면 클릭한 탭메뉴 아이템이 몇 번째인지 값을 출력해 주세요.
+        <br>
+        <input id='mission2' type='button' value='클릭'>
+    </p>
+    <p>미션 03: <br>1초에 한 번씩 탭메뉴 아이템에 select 클래스 적용하기
+        탭메뉴 아이템 개수만큼 1초에 한 번씩 순차적으로 탭메뉴 아이템에 select 클래스를 적용해 주세요.
+        <br>
+        <input id='mission3' type='button' value='클릭'>
+    </p>
+    <p>미션 04: <br>탭메뉴 구현하기
+        <br>
+        <input id='mission4' type='button' value='클릭'>
+    </p>
+</div>
 </body>
 
 </html>

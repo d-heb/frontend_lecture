@@ -4,11 +4,64 @@
     <meta charset="UTF-8">
     <style>
         div,span { background: #FFF; padding: 10px; margin: 10px; }
+        .current { border:2px dotted #00B7FF; }
+        .select { border:2px dotted #660000; }
+        ul>li{line-height:32px;}
     </style>
-    
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var myApp = {};
+            myApp.init = function (e) {
+                $('*').removeClass('select');
+            }
+            $('input[type=button]').click(function (e) {
+                myApp.init();
+                var id = e.target.id;
+                var $current = $('#current');
+                $current.addClass('current');
+                switch (id) {
+                    case 'firstSibling':
+                        $current.prevAll('div').last().addClass('select');
+                        //prevAll은 가까운것부터 index 시작
+                        //$current.parent().children('div').first()
+                        break;
+                    case 'prevSibling':
+                        $current.prev().addClass('select');
+                        break;
+                    case 'nextSibling':
+                        $current.next().addClass('select');
+                        break;
+                    case 'lastSibling':
+                        $current.nextAll('div').last().addClass('select');
+                        break;
+                }
+            });
+
+        })
+    </script>
 </head>
 <body>
+<div>
+    <h3>메서드 설명</h3>
+    <ul>
+        <li> <span class=""> .parents(expr) </span> 기준 노드의 조상 노드 찾기</li>
+        <li> <span class=""> .parent(expr)  </span> 기준 노드의 부모 노드 찾기</li>
+        <li> <span class=""> .closest(expr) </span> 기준 노드의 가장 가까운 조상 노드 찾기</li>
+        <li> <span class=""> .prev(expr)    </span> 기준 노드의 직전 형 노드 찾기</li>
+        <li> <span class=""> .first(expr)   </span> 기준 노드의 첫번째 형 노드 찾기</li>
+        <li> <span class=""> .prevAll(expr) </span> 기준 노드 이전의 형 노드 찾기</li>
+        <li> <span class=""> .contents(expr)</span> 기준 노드의 내부 노드를 찾고 바꾸기</li>
+        <li> <span class=""> .next(expr)    </span> 기준 노드의 동생 노드 찾기</li>
+        <li> <span class=""> .last(expr)    </span> 기준 노드의 마지막 동생 노드 찾기</li>
+        <li> <span class=""> .nextAll(expr) </span> 기준 노드의 모든 동생 노드 찾기</li>
+        <li> <span class=""> .siblings(expr)</span> 기준 노드를 제외한 모든 형제 노드 ≈ prevAll() + nextAll()</li>
+        <li> <span class=""> .children(expr)</span> 기준 노드의 자식 노드 탐색</li>
+        <li> <span class=""> .find(expr)    </span> 기준 노드의 자손 노드 탐색</li>
+    </ul>
+
+</div>
+<div>
     <h2>DOM Selector</h2>
 
     <div>div sibling</div>
@@ -20,7 +73,7 @@
     <div>div sibling</div>
     <span>span sibling (not div)</span>
     <div>div sibling</div>
-
+</div>
     <hr>
     <input id='firstSibling' type='button' value='큰형(first) 찾기'>
     <input id='prevSibling' type='button' value='바로 위 형(prev) 찾기'>
