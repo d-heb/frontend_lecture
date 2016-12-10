@@ -187,6 +187,7 @@
                 var _easing = $('select>option:selected').text();
                 var _callback = function(){
                     console.log(_easing + 'effect ok');
+
                     $('p.fade').show();
                 }
 
@@ -213,7 +214,15 @@
                         });
                         break;
                     case 3:
-                        _target.fadeTo("slow", 0.33);
+                        var _opacity = $(this).css('opacity') === "0.4" ? 1.0 : 0.4;
+                        //speed, to, easing, callback
+//                        _target.fadeTo(_speed, _opacity, _easing, _callback());
+                        _target.fadeTo({
+                            duration : _speed,
+                            opacity : _opacity,
+                            easing : _easing,
+                            complete : _callback()
+                        });
                         break;
 
                 }
@@ -306,7 +315,7 @@
 <span class="fade"> fadeTo()     </span>
 <br>
 
-<p>
+<p class="fade">
     불투명도를 점점 높여서 보이도록 한다.
     speed를 fast, normal, slow 또는 0이상의 숫자(밀리세컨드 단위)를 준다.
     에니메이션이 끝난 후에 실행할 함수를 지정한다.

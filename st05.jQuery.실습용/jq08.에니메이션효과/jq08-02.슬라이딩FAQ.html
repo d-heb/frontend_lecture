@@ -65,6 +65,32 @@
         dd { margin-left: 2em; }
         dd *:first-child { margin-top: 0; padding-top: 0; }
     </style>
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script src="../jquery.easing.1.3.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            //1. find dd
+            //2. hide dd
+            //3. click dt -> dt's child apply toggle
+
+            $('dd').hide();
+            var _easing = 'linear';
+
+            $('dt').click(function(e){
+
+                 $(this).next('dd').slideToggle({
+                    duration: 1000,
+                    easing: _easing,
+                    complete: function () {
+                        console.log(_easing + 'effect ok');
+                    }
+                });
+
+            })
+        });
+    </script>
+
 </head>
 <body>
 
