@@ -3,22 +3,173 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>미션</title>
-    
+
     <style>
-        * { margin:0; padding:0; }
-   		pre   { font-size:13pt;	}
-        .wrap { margin:10px; }
-        .select { width:800px; height:100px; border:1px solid #000; }
-        .select img { width:150px; float:left; } 
-        .container { position: absolute; width:800px; height:400px; border:1px solid #000; } 
-        .container img { position: absolute; width:100px;    }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        pre {
+            font-size: 13pt;
+        }
+
+        .wrap {
+            margin: 10px;
+        }
+
+        .select {
+            width: 800px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+
+        .select img {
+            float: left;
+        }
+
+        .container {
+            position: absolute;
+            width: 800px;
+            height: 400px;
+            border: 1px solid #000;
+        }
+
+        .container img {
+            position: absolute;
+            width: 100px;
+        }
     </style>
 
-    
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+
+        var myApp = {
+            count: 0,
+            imgs: null,
+            selectPanel: null,
+            containerArea: null,
+            dragTarget: null,
+            isDragging: 0,
+            startImgX: 0,
+            startImgY: 0,
+            zIndex: 100,
+
+            init: function () {
+                var $selectPanel =  $('.select');
+
+                console.log('init');
+                myApp.imgs = $('.container img');
+                myApp.selectPanel = $selectPanel;
+                myApp.containerArea = {
+                    left:   $selectPanel.offset().left,
+                    top:    $selectPanel.offset().top,
+                    right:  $selectPanel.offset().left + $selectPanel.width(),
+                    bottom: $selectPanel.offset().top + $selectPanel.height(),
+                }
+            },
+            initImagePosition: function () {
+//                console.log(imgs);
+                var w = $('.container').width();
+                var h = $('.container').height();
+
+                for (var i = 0; i < myApp.imgs.length; i++) {
+                    var $img = $(myApp.imgs[i]);
+                    var left = Math.random() * (w - $img.width());
+                    var top = Math.random() * (h - $img.height());
+
+                    $img.css({'left': left, 'top': top});
+                }
+            },
+            initEvent: function () {
+                console.log('initEvent');
+
+                myApp.imgs.mousedown(function (e) {
+                    console.log('mousedown');
+                    myApp.dragTarget = $(this);
+                    myApp.isDragging = true;
+
+                    //start point
+                    var offset = myApp.dragTarget.offset();
+                    //event point : e.pageX;
+                    myApp.startImgX = e.pageX - offset.left;
+                    myApp.startImgY = e.pageY - offset.top;
+
+                    myApp.zIndex++;
+                    myApp.dragTarget.css('z-index', this.zIndex);
+
+                    if (myApp.isDragging)
+                        myApp.mouseMoveEvent();
+                });
+            },
+            mouseMoveEvent: function (e) {
+                $(document).mousemove(function (e) {
+                    console.log('mousemove');
+                    var endX = e.pageX - myApp.startImgX;
+                    var endY = e.pageY - myApp.startImgY;
+
+                    myApp.dragTarget.offset({'left': endX, 'top': endY});
+                    //기본기능 취소
+                    return false;
+
+                });
+
+                $(document).mouseup(function (e) {
+                    console.log('mouseup');
+
+                    if (myApp.isDragging) {
+                        if (myApp.containerArea.left < e.pageX && e.pageX <= myApp.containerArea.right) {
+                            if (myApp.containerArea.top < e.pageY && e.pageY <= myApp.containerArea.bottom) {
+
+                                myApp.selectPanel.append(myApp.dragTarget);
+                                var containerHeight = $('.select').height();
+                                var $selectedImage = myApp.dragTarget;
+                                var resizeHeight = $selectedImage.height();
+
+                                if($selectedImage.height() < containerHeight){
+                                    resizeHeight = containerHeight;
+                                }else {
+                                    resizeHeight = containerHeight;
+                                    $selectedImage.width(150);
+                                }
+
+                                $selectedImage.height(resizeHeight);
+                            }
+                        }
+                        myApp.dragTarget.off();
+                        myApp.dragTarget = null;
+                        myApp.isDragging = false;
+                        $(document).off();  // 이벤트 제거
+                    }
+                })
+            },
+
+            msg: function () {
+                console.log('msg');
+                if ($.find('label').length < 1) {
+                    var msg = ' 빈 값이 입력되었습니다.';
+                    var label = '<label>' + msg + '</label>';
+                    $menuName.after(label);
+                    window.setTimeout(function () {
+                        $menuName.next('label').remove();
+                    }, 2000);
+                }
+            }
+        };
+
+        $(document).ready(function () {
+            myApp.init();
+            myApp.initImagePosition();
+            myApp.initEvent();
+        })
+    </script>
 </head>
-    
+
 <body>
+<ul>
+    <li>drag&drop event</li>
+    <li>mouse down(시작) -> mousemove -> mouse up(종료)</li>
+</ul>
 <pre>
  드래그앤드 드롭만들기
  요구사항에 맞게 드래그앤드 드롭 기능을 만들어 주세요.
@@ -29,18 +180,18 @@
  2. 컨테이너 영역의 이미지를 드래그되게 만들어 주세요.( initEvent() 만들기 ) 
  3. 드래그 이미지를 선택 영역에 드롭하는 경우 해당 이미지를 선택 영역으로 이동시켜 주세요.
 </pre>
-    <div class="wrap">
-        <div class="select">
-            <!-- 여기에 이미지를 드래그&드랍 하면 추가 됩니다. -->
-        </div>
-        <div class="container">
-            <img src="images/im1.jpg" >
-            <img src="images/im2.jpg" >
-            <img src="images/fish.png" >
-            <img src="images/1.png" >
-            <img src="images/2.png" >
-        </div>
+<div class="wrap">
+    <div class="select">
+        <!-- 여기에 이미지를 드래그&드랍 하면 추가 됩니다. -->
     </div>
+    <div class="container">
+        <img src="images/im1.jpg">
+        <img src="images/im2.jpg">
+        <img src="images/fish.png">
+        <img src="images/1.png">
+        <img src="images/2.png">
+    </div>
+</div>
 </body>
 
 </html>

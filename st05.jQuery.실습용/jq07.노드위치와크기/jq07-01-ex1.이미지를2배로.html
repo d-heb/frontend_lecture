@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+	<meta charset="UTF-8">
+	<title>이벤트 객체</title>
+	<style>
+	    img{  width: 140px; height: 120px; }
+	</style>
+		<script src="../jquery-3.1.0.js"></script>
+		<script>
+            $(document).ready(function () {
+                var myApp = {
+                    init : function(){
+                        console.log('init');
+                        $('*').removeClass('select');
+                        $('#menuName').focus();
+                        $menuName.val('');
+                    },
+                    msg : function(){
+                        console.log('msg');
+                        if($.find('label').length < 1){
+                            var msg = ' 빈 값이 입력되었습니다.';
+                            var label = '<label>' + msg + '</label>';
+                            $menuName.after(label);
+                            window.setTimeout(function () {
+                                $menuName.next('label').remove();
+                            }, 2000);
+                        }
+                    },
+
+                    up : function($item) {
+                        var $before = $item.prev();
+                        $item.insertBefore($before)},
+                    down :  function ($item) {
+                        $item.next().after($item);
+                    }
+                };
+
+                var result = $('#result');
+
+                $('img').click(function (e) {
+                    console.log(e);
+                    var left = $(this).position().left;
+                    var top =  $(this).position().top;
+
+                    var width =  $(this).width();
+                    var height = $(this).height();
+
+
+                    var msg = 'width = ' + width;
+                    msg += '\nheight = ' + height;
+                    msg += '\nleft = ' + left;
+                    msg += '\nright = ' + top;
+
+					result.text(msg);
+
+					$(this).width(width *2);
+					$(this).height(height *2);
+					$(this).css();
+
+                })
+
+				$('button').click(function (e) {
+                    $('img').css({ 'width': 140, 'height': 120});
+                });
+            })
+		</script>
+</head>
+<body>
+<div>
+	<button id="reset">reset</button>
+	<span id="result"></span>
+</div>
+
+<img src="images/im5.jpg" />
+</body>
+</html>

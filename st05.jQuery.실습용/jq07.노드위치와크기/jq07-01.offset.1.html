@@ -9,14 +9,65 @@
          cursor: pointer;
     }
     </style>
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var myApp = {
+                init : function(){
+                    console.log('init');
+                    $('*').removeClass('select');
+                    $('#menuName').focus();
+                    $menuName.val('');
+                },
+                msg : function(){
+                    console.log('msg');
+                    if($.find('label').length < 1){
+                        var msg = ' 빈 값이 입력되었습니다.';
+                        var label = '<label>' + msg + '</label>';
+                        $menuName.after(label);
+                        window.setTimeout(function () {
+                            $menuName.next('label').remove();
+                        }, 2000);
+                    }
+                },
 
-    
-    
+                up : function($item) {
+                    var $before = $item.prev();
+                    $item.insertBefore($before)},
+                down :  function ($item) {
+                    $item.next().after($item);
+                }
+            };
+
+            var result = $('#result');
+
+            $('div.abs').click(function (e) {
+                console.log(e);
+                var left = $(this).position().left;
+                var top =  $(this).position().top;
+
+                var width =  $(this).width();
+                var height = $(this).height();
+
+
+                var msg = 'width = ' + width;
+                msg += 'height = ' + height;
+                msg += 'left = ' + left;
+                msg += 'right = ' + top;
+
+                result.text(msg);
+
+            })
+
+        })
+
+
+    </script>
 
 </head>
 <body>
 <div id="result"></div>
-<div class="abs"></div>
+    <div class="abs"></div>
 </body>
 </html>
 

@@ -2,12 +2,71 @@
 <html lang="ko">
 <head>
     <title>Infinity Scroll</title>
-	
-    
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+
+        var myApp = {
+            count : 0,
+            init : function(){
+                console.log('init');
+                $('*').removeClass('select');
+                $('#menuName').focus();
+                $menuName.val('');
+            },
+            msg : function(){
+                console.log('msg');
+                if($.find('label').length < 1){
+                    var msg = ' 빈 값이 입력되었습니다.';
+                    var label = '<label>' + msg + '</label>';
+                    $menuName.after(label);
+                    window.setTimeout(function () {
+                        $menuName.next('label').remove();
+                    }, 2000);
+                }
+            },
+
+            up : function($item) {
+                var $before = $item.prev();
+                $item.insertBefore($before)},
+            down :  function ($item) {
+                $item.next().after($item);
+            },
+            appendText : function(msg){
+                for(var i=0; i<20; i++){
+                    var result = $('#result');
+                    result.append('<p>'+'count : ' + myApp.count + ' msg : ' + msg + '</p>');
+                }
+            }
+        };
+
+        $(document).ready(function () {
+
+            myApp.appendText('infinity Scroll');
+
+            $(window).scroll(function (e) {
+                console.log(e);
+                var scrollHeight = $(window).scrollTop();
+                var windowHeight = $(window).height();
+
+                var totalScrollHeight = scrollHeight + windowHeight;
+                var documentHeight = $(document).height();
+
+                var diff = totalScrollHeight - documentHeight;
+                if(-10 <= diff && diff<10){
+                    myApp.appendText('plus');
+                }
+            });
+
+            $('button').click(function (e) {
+
+            });
+        })
+    </script>
 </head>
 <body>
-
+<div id="result"></div>
+<button id="top"
+style="float: right;"></button>
 </body>
 </html>
 
