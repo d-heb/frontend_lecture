@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <style>
         body {
-            font-size: 15pt;
-            font-family: "굴림";
+            font-size: 12pt;
+            font-family: "돋움";
         }
 
+        label{color:#F78B83; font-weight: 700;
+            font-size:10pt;
+        padding-left:20px;}
+
         div {
-            width: 350px;
+            /*width: 350px;*/
         }
 
         ul.menu {
@@ -35,50 +39,92 @@
     <script src="../jquery-3.1.0.js"></script>
     <script>
 
+        //        ,
+        //            isEmpty : function(val)
+        //        {
+        //            if (val.match(/^\s+$/) || val === "")	{
+        //                return true;
+        //            }
+        //            return false;
+        //        }
 
         $(document).ready(function () {
-            var myApp = {};
-            myApp.init = function () {
-                $('*').removeClass('select');
-            }
+            var myApp = {
+                init : function(){
+                    console.log('init');
+                    $('*').removeClass('select');
+                    $('#menuName').focus();
+                    $menuName.val('');
+                },
+                msg : function(){
+                    console.log('msg');
+                    if($.find('label').length < 1){
+                        var msg = ' 빈 값이 입력되었습니다.';
+                        var label = '<label>' + msg + '</label>';
+                        $menuName.after(label);
+                        window.setTimeout(function () {
+                            $menuName.next('label').remove();
+                        }, 2000);
+                    }
+                },
+
+                up : function($item) {
+                var $before = $item.prev();
+                $item.insertBefore($before)},
+                down :  function ($item) {
+                    $item.next().after($item);
+                }
+            };
 
             var $menuName = $('#menuName');
             var $ul = $('.menu');
 
             $('button').click(function (e) {
-                myApp.init();
                 var id = e.target.id;
+                var text = $menuName.val();
+                var $selected = $('.select');
 
                 switch (id) {
                     case 'add'  :
-                        var text = $menuName.val();
-                        if(text === ""){
-                            $menuName.focus();
-                        }else{
-                            var $li = '<li>'+text+'</li>';
+//                        if (text.match(/^\s+$/) || text !== "" ){
+                        if (text.trim() != '') {
+                            var $li = '<li>' + text + '</li>';
                             $ul.append($li);
-                            $menuName.val('');
+                        }else{
+                            myApp.msg();
                         }
+                        myApp.init();
                         break;
                     case 'update'  :
-                        $('.select').text($menuName.val());
+                        console.log('text : ' + text);
+                        if ($selected.length > 0) {
+                            //element설정 : html()
+                            //attribute설정 : text()
+                            $selected.text($menuName.val());
+                        }
+                        myApp.init();
                         break;
-                    case 'remove'   :
-                        $center.append('<div>' + $name.val() + '</div>').addClass('added');
+                    case 'remove':
+                        $selected.remove();
+                        myApp.init();
                         break;
                     case 'up'   :
-                        $center.before('<div>' + $name.val() + '</div>').addClass('added');
+                        myApp.up($selected);
                         break;
-                    case 'down'    :
-                        $center.after('<div>' + $name.val() + '</div>').addClass('added');
+                    case 'down':
+                        myApp.down($selected);
                         break;
                 }
             });
 
-            $('body').on('click', 'ul.menu>li' , function(e){
+//            $('body').on('click', 'ul.menu>li' , function(e){
+            // body보다는 직계부모에게 이벤트를 걸어서 하는 것이 좋다.
+            $('ul.menu').on('click', 'li', function (e) {
                 //동적 이벤트 리스너 설정
                 //페이지가 load된 후 추가된 엘리먼트에 이벤트를 설정할 때
                 myApp.init();
+
+                $('ul.menu > li').removeClass('select');
 
                 $(this).addClass('select');
                 console.log($(this).text());
@@ -87,12 +133,13 @@
         })
 
 
-
-
     </script>
 </head>
 
 <body>
+<!--<div id="foo">FOO!</div>-->
+<!--<p>I would like to say: </p> -->
+
 <div>
     <input type="text" id="menuName"/>
     <br>
