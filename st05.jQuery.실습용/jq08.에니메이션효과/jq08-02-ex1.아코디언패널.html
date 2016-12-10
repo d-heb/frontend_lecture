@@ -120,19 +120,31 @@
 
 <body>
 <dl>
-    <dt>Step.1</dt>
-    <dd><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis neque urna, molestie id cursus non, bibendum
-        nec magna. Mauris consequat faucibus ante sollicitudin ullamcorper. Proin et felis orci. Nulla vitae diam sit
-        amet felis semper ultricies. Nulla vitae mauris sit amet augue pulvinar pulvinar. Donec tincidunt viverra turpis
-        eget suscipit. Morbi eu lacus iaculis turpis suscipit pretium. Aenean ultricies scelerisque dictum. Phasellus
-        tincidunt, nibh lacinia facilisis aliquam, lacus quam condimentum orci, id lacinia justo odio vel purus. Mauris
-        molestie tortor eu purus facilisis at congue sapien commodo. Sed ac eros vitae odio ultrices mollis nec a lorem.
-        Phasellus sit amet dolor nec tellus consequat ornare sit amet ut ipsum. Vestibulum sagittis, mi sed pulvinar
-        semper, lacus mauris lobortis eros, eu egestas est lectus nec lacus. Donec in lacus quis elit consectetur
-        accumsan sit amet sed tortor. Etiam id vestibulum libero. Nam faucibus tincidunt felis, eu feugiat nibh
-        fringilla vel. Donec adipiscing dictum imperdiet. Nulla ac fringilla neque. Curabitur posuere euismod est vel
-        vehicula. Curabitur quis ligula sit amet quam tempus venenatis.</p></dd>
-    <dt>Step.2</dt>
+    <dt>Step.1 : 이벤트 처리 과정</dt>
+    <dd>
+        <ul>
+            <li> 이벤트 객체 : event.target</li>
+            <li> 이벤트 종류</li>
+            <li> 이벤트 단계 : capture / target / <strong> bubble : 자식 이벤트는 부모까지 올라간다. 따라서 어떤 자식이 이벤트를 발생시켰는지 확인해야한다. </strong> </li>
+            <li> 이벤트 핸들러 설정 : <strong> 동적이벤트설정 : "on" </strong>
+                <P>페이지가 load된 후 추가된 엘리먼트에 이벤트를 설정할 때</P>
+                <p> $('부모태그').on('적용할 이벤트', '추가될태그', 함수);</p>
+                </li>
+            <li> 이벤트 등록 : on()
+                <p> 표준 <p>
+                <p> $('태그').on('이벤트', 함수);</p>
+
+                    / one()</li>
+            <li> 이벤트 제거 : $('해당태그').off()</li>
+            <li> 이벤트 취소 :
+            <li><p> return false </p>
+                <p>event.preventDefault() </p>
+                <p>event.stopPropagation()</p></li>
+            <li> 이벤트 발생 : event.trigger()</li>
+            <li> 사용자 이벤트
+        </ul>
+    </dd>
+    <dt>Step.2 : 이벤트 실행 과정(P58)</dt>
     <dd><p>Integer rhoncus felis mauris. Donec massa nisi, posuere vel posuere vel, suscipit sed magna. Sed congue
         scelerisque odio, faucibus tempor nisl posuere condimentum. In eu tellus vitae elit consequat pretium. Maecenas
         nec ultrices dolor. Curabitur eu pulvinar turpis. Aenean vel tortor justo, id dapibus velit. Mauris pulvinar
