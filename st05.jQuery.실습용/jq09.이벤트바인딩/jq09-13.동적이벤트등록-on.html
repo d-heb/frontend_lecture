@@ -9,12 +9,24 @@
         display:block; margin-top:10px;}
     div { border: 1px dashed red; }
 </style>
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+    $(document).ready(function (e) {
+        $('p').click(function (e) {
+            $('#p').append('<p> p paragraph </p>');
+            $('.menu').html('<p> p paragraph clicked</p>');
+        })
 
-
+        $('span').click(function (e) {
+            $('#span').append('<span> span paragraph </span>');
+            $('.menu').html('<span> span paragraph clicked </span>');
+        })
+    });
+</script>
 </head>
 <body>
     <p>Click me!</p>
-    <div id="p"> </div>
+    <div id="p"></div>
     <hr>
 
     <span>Click me!</span>
