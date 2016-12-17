@@ -5,12 +5,62 @@
     <link rel="stylesheet" href="css/master.css">
 
     <style>
-        .mgt40 { padding:20px 0 10px 0; text-align: center; }
+        .mgt40 {
+            padding: 20px 0 10px 0;
+            text-align: center;
+        }
     </style>
+    <script src="../../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var checkboxes = $('input[name=checkbox]');
+            $('#chkAgreeALL').click(function (e) {
+                checked(checkboxes);
+            })
+
+            $('.btn_type4').click(function (e) {
+                for (var c in checkboxes) {
+                    var cc = $(checkboxes[c]);
+                    var flag = cc.is(':checked');
+                    var msg;
+                    if (!flag) {
+                        if (c == 0) {
+                            msg = '이용약관에 동의해주세요.';
+                            alert(msg);
+                            cc.focus();
+                            return;
+                        }
+                        else if (c == 1) {
+                            msg = '개인정보에 동의해주세요.';
+                            alert(msg);
+                            cc.focus();
+                            return;
+                        }
+                    }
+                }
+
+                $('#chkAgreeALL').attr('checked', true);
+                msg = '모두 동의하였습니다.';
+                alert(msg);
+
+                //submit 호출 시 , form action 주소로 넘어간다.
+                $('#searchLoginVO').submit();
 
 
-    
-    
+            })
+
+        })
+
+        var checked = function (checkboxes) {
+            for (var c in checkboxes) {
+                var cc = $(checkboxes[c]);
+                var flag = cc.is(':checked') == true ? false : true;
+                cc.attr('checked', flag);
+            }
+        }
+
+    </script>
+
 
 </head>
 <body>
@@ -235,7 +285,8 @@
                             </ul>
                         </div>
                         <p class="mgt_10">
-                            <input type="checkbox" id="agree_use" title="위의 'k-startup 이용약관'에 동의합니다." class="check1">
+                            <input type="checkbox" id="agree_use" title="위의 'k-startup 이용약관'에 동의합니다." class="check1"
+                                   name="checkbox">
                             <label for="agree_use"> 위의 'k-startup 이용약관'에 동의합니다.</label>
                         </p>
                         <!-- //이용약관 -->
@@ -329,7 +380,8 @@
                             </ul>
                         </div>
                         <p class="mgt_10">
-                            <input type="checkbox" id="agree_private" title="위의 '개인정보 수집 및 이용에 대한 안내'에 동의합니다." class="check1">
+                            <input type="checkbox" name="checkbox" id="agree_private"
+                                   title="위의 '개인정보 수집 및 이용에 대한 안내'에 동의합니다." class="check1">
                             <label for="agree_private"> 위의 '개인정보 수집 및 이용에 대한 안내'에 동의합니다.</label>
                         </p>
                         <!-- //개인정보처리방침 -->
@@ -341,7 +393,8 @@
                         <!-- 버튼영역 -->
                         <div class="btn_box ar">
                             <a class="btn_type4"><span>동의</span></a>
-                            <a class="btn_type5" href="/home/login/memberJoinView.do?mid=30036" style="cursor: pointer;"><span>취소</span></a>
+                            <a class="btn_type5" href="/home/login/memberJoinView.do?mid=30036"
+                               style="cursor: pointer;"><span>취소</span></a>
                         </div>
                         <!-- //버튼영역 -->
                     </form>

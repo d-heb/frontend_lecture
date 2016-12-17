@@ -2,13 +2,68 @@
 <html lang="ko">
 <head>
     <title>Infinity Scroll</title>
-    
-    
+    <script src="../jquery-3.1.0.js"></script>
+    <script src="ajaxCall.js"></script>
+    <script>
+
+        var myApp = {
+            count: 0,
+            appendText: function (msg) {
+                for (var i = 0; i < 20; i++) {
+                    var result = $('#result');
+                    result.append('<p>' + 'count : ' + i + ' msg : ' + msg + '</p>');
+                }
+            }
+        };
+
+        $(document).ready(function () {
+
+            var url = 'http://localhost:3000';
+            var path = 'board';
+            var startCount = 1;
+            var diff = 40;
+            var param = '?start='+startCount+'&end='+ (startCount + diff-1);
+            var type = 'json';
+            var context = $('#tbody');
+
+            var loadData = _ajax.callData(context, url, path, param, type);
+            console.log(loadData);
+
+            $(window).scroll(function (e) {
+                console.log(e);
+                var scrollHeight = $(window).scrollTop();
+                var windowHeight = $(window).height();
+
+                var totalScrollHeight = scrollHeight + windowHeight;
+                var documentHeight = $(document).height();
+
+                var diff = totalScrollHeight - documentHeight;
+                if(-10 <= diff && diff<10){
+                    startCount = myApp.count;
+                    diff = 40;
+                    param = '?start='+startCount+'&end='+ (startCount + diff-1);
+                    alert('끝입니다.' + param);
+                     _ajax.callData(context, url, path, param, type);
+                }
+            });
+        })
+    </script>
 </head>
 <body>
-
+<table id="treeData">
+    <thead>
+    <tr>
+        <th>No</th>
+        <th>title</th>
+        <th>writer</th>
+        <th>content</th>
+    </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+</table>
+<div id="result"></div>
+<button id="top"
+        style="float: right;"></button>
 </body>
 </html>
-
-
 

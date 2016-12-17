@@ -7,8 +7,72 @@
         table { border-collapse: collapse; }
         table, th, td { border: 1px solid black; }
     </style>
-    
-    
+
+    <script src="../jquery-3.1.0.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            var $loadImage = '<img src=\"loading.gif\">';
+            app = {
+                getHtmlData: function () {
+                    console.log('getHtmlData');
+                    $.ajax({
+                        url: 'localhost:3000/html',
+                        data: 'item.html', // 사용하는 경우에는 { data1:'test1', data2:'test2' }
+                        type: 'get', // get, post
+                        timeout: 30000,
+                        dataType: 'html', // text, html, xml, json, jsonp, script
+                        beforeSend: function () {// 통신이 시작되기 전에 이 함수를 타게 된다.
+                            $('#message1').html($loadImage);
+                        },
+                        success: function (data) {// 통신이 성공적으로 이루어졌을 때 이 함수를 타게 된다.
+                            console.log(data);
+                            $('#message1').html(data);
+                        },
+                        error: function (xhr, status, error) {
+// 통신이 실패했을 때 이 함수를 타게 된다.
+                        },
+                        complete: function (data) {
+// 통신이 실패했어도 완료가 되었을 때 이 함수를 타게 된다.
+                        }
+
+                    });
+                    return false;
+
+                }, getTextData: function () {
+                    console.log('getTextData');
+
+                },
+                getData3: function () {
+                    console.log('getData3');
+
+                },
+                getData4: function () {
+                    console.log('getData4');
+
+                }
+            }
+            $('a').click(function (e) {
+                var target = e.target.id;
+                console.log(target);
+                switch (target) {
+                    case 'menu1':
+                        app.getHtmlData();
+                        break;
+                    case 'menu2':
+                        app.getTextData();
+                        break;
+                    case 'menu3':
+                        app.getData3();
+                        break;
+                    case 'menu4':
+                        app.getData4();
+                        break;
+                }
+            });
+
+        })
+    </script>
+
 </head>
 <body>
     <h1> jQuery 1.7 이하에서 사용할 때 </h1>
